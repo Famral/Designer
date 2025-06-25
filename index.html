@@ -1,21 +1,274 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famral Create - Create Design, Signature & Logo</title>
+    <meta name="description" content="Explore our professional online tools: Create Design, Create Signature, and Create Logo. Fast, easy, and free to use for your creative needs.">
+    <meta name="keywords" content="create design, create signature, create logo, online tools, creative tools, free design tools">
+    <meta name="author" content="Famral">
+    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/x-icon" href="https://www.famral.com/favicon.png" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <title>Quick & Easy Graphic Design Software - Famral Create</title>
-    <meta name="description" content="Famral Create is a free-to-use online graphic design tool. Use it to create social media posts, posters, logos and more." />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
-    <script defer="defer" src="main.c3adf487.js"></script>
-    <link href="main.99bf5717.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
+        }
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 0.7rem 0;
+            margin-bottom: 2rem;
+        }
+        .navbar-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .navbar-logo img {
+            height: 32px;
+            margin-right: 10px;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .navbar-links a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            background: #e0e7ff;
+            color: #2563eb;
+        }
+        .main-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem 1rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+            padding: 2.2rem 1.5rem 1.7rem 1.5rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .product-icon {
+            font-size: 2.7rem;
+            color: #2563eb;
+            margin-bottom: 1.1rem;
+        }
+        .product-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: #1e40af;
+        }
+        .product-desc {
+            font-size: 1.07rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .product-link {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 0.8rem 2.2rem;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+        }
+        .product-link:hover {
+            background: #1e40af;
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 700px) {
+            .navbar-container {
+                flex-direction: row;
+                align-items: center;
+                gap: 0;
+                width: 100%;
+                padding: 0 0.7rem;
+                position: relative;
+            }
+            .navbar-logo {
+                flex: 1 1 auto;
+            }
+            .navbar-menu-btn {
+                display: block !important;
+                margin-left: auto;
+                z-index: 201;
+            }
+            .navbar-links {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column !important;
+                align-items: flex-start;
+                gap: 0.7rem;
+                border-bottom: 1px solid #e5e7eb;
+                box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+                z-index: 200;
+                display: none;
+                padding: 0.7rem 1.2rem;
+                transition: all 0.2s;
+            }
+            .navbar-links.show {
+                display: flex !important;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .main-section {
+                padding: 1.2rem 0.3rem 2rem 0.3rem;
+            }
+            .product-card {
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+            }
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            .product-title {
+                font-size: 1.1rem !important;
+            }
+            .product-desc {
+                font-size: 0.98rem !important;
+            }
+            .product-link {
+                font-size: 1rem !important;
+                padding: 0.7rem 1.2rem !important;
+            }
+        }
+    </style>
 </head>
-
-<body><noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="https://create.famral.com/" class="navbar-logo">
+                <img src="https://www.famral.com/favicon.png" alt="Logo"> Famral Create
+            </a>
+            <button class="navbar-menu-btn" aria-label="Open menu" style="display:none; background:none; border:none; font-size:1.8rem; color:#2563eb; cursor:pointer;">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-links">
+                <a href="https://www.famral.com/create">About</a>
+                <a href="https://www.famral.com/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <section class="main-section">
+        <h1 style="text-align:center; color:#2563eb; font-size:2.2rem; margin-bottom:0.7rem;">Our Creative Tools</h1>
+        <p style="text-align:center; color:#334155; font-size:1.13rem; margin-bottom:2.5rem;">
+            Discover our suite of professional online tools to boost your creativity and productivity.
+        </p>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="product-title">Create Design</div>
+                <div class="product-desc">
+                    Design stunning graphics, banners, and social media posts with our easy-to-use online design tool.
+                </div>
+                <a class="product-link" href="https://create.famral.com/design">Create Design</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-signature"></i></div>
+                <div class="product-title">Create Signature</div>
+                <div class="product-desc">
+                    Instantly generate stylish digital signatures for documents, emails, and more. Fast, free, and secure.
+                </div>
+                <a class="product-link" href="https://create.famral.com/signature">Create Signature</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-gem"></i></div>
+                <div class="product-title">Create Logo</div>
+                <div class="product-desc">
+                    Make a professional logo for your brand or business in minutes with our professional logo maker.
+                </div>
+                <a class="product-link" href="https://create.famral.com/logo">Create Logo</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Show/hide menu icon and toggle nav links on small screens
+        const menuBtn = document.querySelector('.navbar-menu-btn');
+        const navLinks = document.querySelector('.navbar-links');
+        function handleResize() {
+            if (window.innerWidth <= 700) {
+                menuBtn.style.display = 'block';
+                navLinks.classList.remove('show');
+                navLinks.style.display = '';
+            } else {
+                menuBtn.style.display = 'none';
+                navLinks.classList.remove('show');
+                navLinks.style.display = 'flex';
+                navLinks.style.position = '';
+                navLinks.style.top = '';
+                navLinks.style.left = '';
+                navLinks.style.background = '';
+                navLinks.style.flexDirection = '';
+                navLinks.style.alignItems = '';
+                navLinks.style.gap = '';
+                navLinks.style.borderBottom = '';
+                navLinks.style.boxShadow = '';
+                navLinks.style.zIndex = '';
+                navLinks.style.padding = '';
+                navLinks.style.transition = '';
+            }
+        }
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+        // Hide menu when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 700) {
+                if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('show');
+                }
+            }
+        });
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('DOMContentLoaded', handleResize);
+    </script>
 </body>
-
 </html>
