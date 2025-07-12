@@ -1,777 +1,298 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Famral – Quick & Easy Graphic Design Software</title>
-  <meta name="description"
-    content="Famral is a powerful, easy-to-use online graphic design software for everyone. Design logos, posters, social media graphics, and more!.">
-  <meta name="keywords"
-    content="Famral, graphic design, online design tool, logo maker, poster creator, social media graphics">
-  <link rel="icon" type="image/png" href="./favicon.png"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <style>
-    :root {
-      --primary: #2563eb;
-      /* Blue */
-      --primary-dark: #1d4ed8;
-      --primary-light: #2563eb;
-      --secondary: #6c757d;
-      /* Gray */
-      --success: #28a745;
-      /* Green */
-      --danger: #dc3545;
-      /* Red */
-      --warning: #ffc107;
-      /* Yellow */
-      --info: #17a2b8;
-      /* Teal */
-      --light: #f8f9fa;
-      /* Very Light Gray */
-      --dark: #343a40;
-      /* Dark Gray / Almost Black */
-      --card: #ffffff;
-      /* White */
-      --gray: #adb5bd;
-      --gray-dark: #495057;
-
-      --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-      --border-light: 1px solid #dee2e6;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-family-sans-serif);
-      line-height: 1.6;
-      color: var(--dark);
-      background-color: var(--light);
-      font-size: 16px;
-      /* Base font size */
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: color 0.2s ease-in-out;
-    }
-
-    a:hover {
-      color: var(--primary-dark);
-      text-decoration: underline;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      /* Prevent bottom space */
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--dark);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    h3 {
-      font-size: 1.75rem;
-    }
-
-    h4 {
-      font-size: 1.5rem;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: var(--gray-dark);
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    /* --- Utility Classes --- */
-    .container,
-    .nav-container,
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      /* Add horizontal padding */
-    }
-
-    .section {
-      padding: 4rem 0;
-    }
-
-    .section h2 {
-      text-align: center;
-      margin-bottom: 3rem;
-      font-size: 2.25rem;
-      color: var(--dark);
-    }
-
-    .section h2 i {
-      margin-right: 0.5rem;
-      color: var(--primary);
-    }
-
-    /* --- Navbar --- */
-    .navbar {
-      background-color: #ffffff;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
-      border-bottom: var(--border-light);
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--dark);
-      text-decoration: none;
-      display: flex;
-      /* Added for logo alignment */
-      align-items: center;
-      /* Added for logo alignment */
-    }
-
-    .nav-logo:hover {
-      text-decoration: none;
-      color: var(--primary);
-    }
-
-    .nav-logo img {
-      height: 30px;
-      /* Control logo image height */
-      margin-right: 8px;
-      /* Space between image and text */
-    }
-
-
-    .nav-links-wrapper {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links-wrapper a {
-      color: var(--dark);
-      font-weight: 500;
-      padding: 0.5rem 0;
-      position: relative;
-      text-decoration: none;
-    }
-
-    .nav-links-wrapper a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--primary);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links-wrapper a:hover,
-    .nav-links-wrapper a.active {
-      /* Style for active link if needed */
-      color: var(--primary);
-    }
-
-    .nav-links-wrapper a:hover::after {
-      width: 100%;
-    }
-
-    .nav-toggle {
-      display: none;
-      /* Hidden by default */
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--dark);
-      cursor: pointer;
-    }
-
-    /* --- Hero Section --- */
-    .hero {
-      background: linear-gradient(45deg, var(--primary), var(--primary-light));
-      color: #ffffff;
-      padding: 5rem 1.5rem;
-      /* Use padding on the section itself */
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      max-width: 700px;
-      margin: 0 auto 1rem auto;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    /* --- Services / Features Section --- */
-    .services-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .service-box {
-      background-color: var(--card);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow-md);
-      border: var(--border-light);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .service-box:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .service-icon {
-      display: inline-block;
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      background-color: rgba(0, 123, 255, 0.1);
-      /* Light primary background */
-      width: 70px;
-      height: 70px;
-      line-height: 70px;
-      /* Center icon vertically */
-      border-radius: 50%;
-      text-align: center;
-    }
-
-    .service-box h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: var(--dark);
-    }
-
-    .service-box p {
-      color: var(--gray-dark);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      /* Ensure space before link */
-    }
-
-    /* Styling for the links inside service-box */
-    .service-box a {
-      display: inline-block;
-      /* Allows margin-top */
-      margin-top: 1rem;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .service-box a:hover {
-      color: var(--primary-dark);
-      text-decoration: underline;
-    }
-
-    .service-box a i {
-      margin-left: 0.3rem;
-      font-size: 0.8em;
-      /* Make chevron slightly smaller */
-    }
-
-
-    /* --- CTA Section (Optional) --- */
-    .cta {
-      background-color: var(--primary);
-      color: #ffffff;
-      text-align: center;
-      padding: 4rem 1.5rem;
-      margin-top: 4rem;
-      /* Add space above CTA if used */
-    }
-
-    .cta h2 {
-      color: #ffffff;
-      margin-bottom: 1rem;
-    }
-
-    .cta p {
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
-
-    .cta a {
-      display: inline-block;
-      background-color: #ffffff;
-      color: var(--primary);
-      padding: 0.8rem 2rem;
-      border-radius: 5px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .cta a:hover {
-      background-color: var(--light);
-      color: var(--primary-dark);
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
-
-    /* --- Footer --- */
-    .site-footer {
-      background-color: var(--dark);
-      color: rgba(255, 255, 255, 0.7);
-      padding: 3rem 0 1rem 0;
-      /* More padding top, less bottom */
-      margin-top: 4rem;
-      /* Space above footer */
-    }
-
-    /* Footer Links Grid */
-    .footer-links-grid {
-      /* Added class for styling */
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--gray-dark);
-      /* Darker border */
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1.5rem;
-      text-align: left;
-      /* Align text left for better readability */
-    }
-
-    .footer-links-grid h4 {
-      color: rgb(235, 235, 235);
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .footer-links-grid ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links-grid li {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-links-grid a {
-      color: rgb(172, 172, 172);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links-grid a:hover {
-      color: #dadada;
-      text-decoration: underline;
-    }
-
-    /* Footer Bottom Content */
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      /* Allow wrapping on small screens */
-      gap: 1rem;
-      padding-top: 1.5rem;
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    .footer-content p {
-      color: rgb(164, 164, 164);
-      margin-bottom: 0;
-      /* Reset paragraph margin */
-      flex-basis: 100%;
-      /* Default to full width */
-    }
-
-    @media (min-width: 768px) {
-      .footer-content {
-        text-align: left;
-        /* Align left on larger screens */
-      }
-
-      .footer-content p {
-        flex-basis: auto;
-        /* Allow side-by-side layout */
-      }
-    }
-
-
-    .back-to-top {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .back-to-top:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-
-    .back-to-top i {
-      margin-left: 0.3rem;
-    }
-
-    /* --- Responsive Design --- */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-size: 1.75rem;
-      }
-
-      h3 {
-        font-size: 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .section {
-        padding: 3rem 0;
-      }
-
-      .section h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .nav-toggle {
-        display: block;
-        /* Show hamburger */
-      }
-
-      .nav-links-wrapper {
-        display: none;
-        /* Hide links by default */
-        position: absolute;
-        top: 100%;
-        /* Position below navbar */
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        flex-direction: column;
-        padding: 1rem 0;
-        box-shadow: var(--shadow-md);
-        border-top: var(--border-light);
-      }
-
-      .nav-links-wrapper.active {
-        display: flex;
-        /* Show when active */
-      }
-
-      .nav-links-wrapper a {
-        padding: 0.75rem 1.5rem;
-        /* Adjust padding for vertical layout */
-        text-align: center;
-        border-bottom: var(--border-light);
-      }
-
-      .nav-links-wrapper a:last-child {
-        border-bottom: none;
-      }
-
-      .nav-links-wrapper a::after {
-        display: none;
-        /* Hide underline effect on mobile */
-      }
-
-      .services-list {
-        grid-template-columns: 1fr;
-        /* Stack cards */
-        gap: 1.5rem;
-      }
-
-      .service-box {
-        padding: 1.5rem;
-      }
-
-      /* Adjust footer links grid for mobile */
-      .footer-links-grid {
-        text-align: center;
-        /* Center align footer links on mobile */
-        gap: 1rem;
-      }
-
-      .footer-links-grid h4 {
-        margin-bottom: 0.5rem;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        /* Stack copyright and back-to-top */
-        padding-top: 1rem;
-      }
-    }
-  </style>
-
-</head>
-
-<body>
-
-  <nav class="navbar">
-    <div class="nav-container">
-      <!-- Logo -->
-      <a href="https://www.famral.com/" class="nav-logo">
-        <img src="https://www.famral.com/favicon.png" alt="Famral Logo">
-        Famral
-      </a>
-
-      <!-- Mobile Menu Toggle Button -->
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <!-- Navigation Links -->
-      <div class="nav-links-wrapper" id="navLinks">
-        <a href="/">Home</a>
-                <a href="/features">Features</a>
-                        <a href="https://app.famral.com">Create Design</a>
-
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1>Create online graphics in minutes.</h1>
-      <p>Start-up graphic design for social media, ads, blogs and more, even if you're not a graphic designer.
-      </p>
-    </section>
-
-    <!-- Container for main content -->
-    <div class="container">
-
-      <!-- Features/Products Section -->
-      <section class="section" id="features">
-        <h2><i class="fas fa-star" aria-hidden="true"></i> Explore Our Products & Services <i class="fas fa-star"
-            aria-hidden="true"></i></h2>
-        <div class="services-list">
-
-          <!-- Card 1: Famral Services -->
-          <div class="service-box">
-            <span class="service-icon" aria-hidden="true">
-              <i class="fas fa-pencil-ruler"></i>
-            </span>
-            <h3>Create Graphics</h3>
-            <p>
-              We build unique and professional websites & application designs tailored to your brand’s goals and
-              identity. </p>
-            <a href="https://www.famral.com/features" target="_blank">Explore Features <i
-                class="fas fa-chevron-right fa-xs"></i></a> <!-- Removed inline style -->
-          </div>
-
-          <!-- Card 2: Famral Create -->
-          <div class="service-box">
-            <span class="service-icon" aria-hidden="true">
-              <i class="fas fa-images"></i>
-            </span>
-            <h3>Photo Editor</h3>
-            <p>
-              Famral Create is your all-in-one online graphic design tool.
-            </p>
-            <a href="https://www.famral.com/features/photo-editor" target="_blank">Edit Your Photos <i
-                class="fas fa-chevron-right fa-xs"></i></a> <!-- Removed inline style -->
-          </div>
-
-          <!-- Card 4: Online Web Tools -->
-          <div class="service-box">
-            <span class="service-icon" aria-hidden="true">
-              <i class="fas fa-tools"></i>
-            </span>
-            <h3>Background Remover</h3>
-            <p>
-              Explore website codes and scripts to start your own website. Internet-based tools that are designed to
-              assist individuals in various professions.
-            </p>
-            <a href="https://www.famral.com/features/background-remover" target="_blank">Remover Background <i
-                class="fas fa-chevron-right fa-xs"></i></a> <!-- Removed inline style -->
-          </div>
-
-        </div> <!-- End services-list -->
-      </section> <!-- End features section -->
-
-      <!-- Optional: Add a CTA section if desired -->
-      <!--
-            <section class="cta" id="contact">
-                <h2>Interested in Custom Solutions?</h2>
-                <p>Contact us for bespoke web development and graphic design services.</p>
-                <a href="https://www.famral.com/contact">Get a Quote</a>
-            </section>
-            -->
-
-    </div> <!-- End container -->
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-container">
-
-      <!-- Footer Links Section -->
-      <div class="footer-links-grid"> <!-- Added class, removed inline style -->
-        <div>
-          <h4>Services</h4>
-          <ul>
-            <li><a href="https://www.famral.com/cloud">Web Hosting</a></li>
-            <li><a href="https://www.famral.com/create">Graphic Design Maker</a></li>
-            <li><a href="https://stock.famral.com/">Creative Asset Stock</a></li>
-            <li><a href="https://www.famral.com/services">Custom Services</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Free Resources</h4>
-          <ul>
-            <li><a href="https://www.famral.com/features">Famral Features</a></li>
-            <li><a href="https://stock.famral.com/emoji" target="_blank">Free Emoji Collection</a></li>
-            <li><a href="https://stock.famral.com/images" target="_blank">Free Images</a></li>
-            <li><a href="https://www.useoftools.com/qr-code-generator" target="_blank">Generate QR Code</a></li>
-            
-          </ul>
-        </div>
-        <div>
-          <h4>Company</h4> <!-- Removed inline style -->
-          <ul> <!-- Removed inline style -->
-            <li><a href="/privacy">Privacy Policy</a></li> <!-- Removed inline style -->
-            <li><a href="/terms">Terms & Conditions</a></li> <!-- Removed inline style -->
-            <li><a href="/contact">Contact Us</a></li> <!-- Removed inline style -->
-          </ul>
-        </div>
-      </div>
-
-      <!-- Footer Content (Copyright, etc.) -->
-      <div class="footer-content">
-        <p>&copy; <span id="current-year"></span> Famral. All Rights Reserved.</p>
-        <p><a href="#" class="back-to-top">Back to Top <i class="fas fa-arrow-up"></i></a></p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Simple JS for Mobile Menu Toggle -->
-  <script>
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links-wrapper');
-    const toggleIcon = navToggle.querySelector('i'); // Get the icon element
-
-    navToggle.addEventListener('click', () => {
-      const isExpanded = navLinks.classList.toggle('active');
-      navToggle.setAttribute('aria-expanded', isExpanded);
-
-      // Change icon from bars to times (X) when open
-      if (isExpanded) {
-        toggleIcon.classList.remove('fa-bars');
-        toggleIcon.classList.add('fa-times');
-      } else {
-        toggleIcon.classList.remove('fa-times');
-        toggleIcon.classList.add('fa-bars');
-      }
-    });
-
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-          navToggle.setAttribute('aria-expanded', 'false');
-          toggleIcon.classList.remove('fa-times');
-          toggleIcon.classList.add('fa-bars');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famral - Professional Online Tools for Graphic Design</title>
+    <meta name="description" content="Explore our professional online tools: Create Graphic Design, Create Signature, and Create Logo. Fast, easy, and free to use for your creative needs.">
+    <meta name="keywords" content="create design, create signature, create logo, online tools, creative tools, free design tools">
+    <meta name="author" content="Famral">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="https://www.famral.com/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
         }
-      });
-    });
-
-    // Update the copyright year automatically
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
-
-
-          <script
-            src='https://oweb.zohowebstatic.com/sites/oweb/js/r/whatsapp-widget-generator.js'
-            async
-            onLoad="widget_whatsappButton({
-                buttonName: 'Famral',
-                brandImageUrl: '',
-                brandName: 'Famral',
-                brandStatusText: 'Typically replies within minutes.',
-                buttonSize: 'large',
-                buttonPosition: 'bottom-right',
-                phoneNumber: '7878358707',
-                welcomeMessage: 'Welcome to Famral',
-                prefillMessages: 'I am looking for:',
-                replyOptions: 'Website Related Services,Graphic Design Services,Custom Services,Contact Us'
-            })"
-        >
-        </script>
-  
-
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 0.7rem 0;
+            margin-bottom: 2rem;
+        }
+        .navbar-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .navbar-logo img {
+            height: 32px;
+            margin-right: 10px;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .navbar-links a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            background: #e0e7ff;
+            color: #2563eb;
+        }
+        .main-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem 1rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+            padding: 2.2rem 1.5rem 1.7rem 1.5rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .product-icon {
+            font-size: 2.7rem;
+            color: #2563eb;
+            margin-bottom: 1.1rem;
+        }
+        .product-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: #1e40af;
+        }
+        .product-desc {
+            font-size: 1.07rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .product-link {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 0.8rem 2.2rem;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+        }
+        .product-link:hover {
+            background: #1e40af;
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 700px) {
+            .navbar-container {
+                flex-direction: row;
+                align-items: center;
+                gap: 0;
+                width: 100%;
+                padding: 0 0.7rem;
+                position: relative;
+            }
+            .navbar-logo {
+                flex: 1 1 auto;
+            }
+            .navbar-menu-btn {
+                display: block !important;
+                margin-left: auto;
+                z-index: 201;
+            }
+            .navbar-links {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column !important;
+                align-items: flex-start;
+                gap: 0.7rem;
+                border-bottom: 1px solid #e5e7eb;
+                box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+                z-index: 200;
+                display: none;
+                padding: 0.7rem 1.2rem;
+                transition: all 0.2s;
+            }
+            .navbar-links.show {
+                display: flex !important;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .main-section {
+                padding: 1.2rem 0.3rem 2rem 0.3rem;
+            }
+            .product-card {
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+            }
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            .product-title {
+                font-size: 1.1rem !important;
+            }
+            .product-desc {
+                font-size: 0.98rem !important;
+            }
+            .product-link {
+                font-size: 1rem !important;
+                padding: 0.7rem 1.2rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="https://app.famral.com/" class="navbar-logo">
+                <img src="https://www.famral.com/favicon.png" alt="Logo"> Famral
+            </a>
+            <button class="navbar-menu-btn" aria-label="Open menu" style="display:none; background:none; border:none; font-size:1.8rem; color:#2563eb; cursor:pointer;">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-links">
+                <a href="https://www.famral.com/">About</a>
+                <a href="https://www.famral.com/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <section class="main-section">
+        <h1 style="text-align:center; color:#2563eb; font-size:2.2rem; margin-bottom:0.7rem;">Our Creative Tools</h1>
+        <p style="text-align:center; color:#334155; font-size:1.13rem; margin-bottom:2.5rem;">
+            Discover our suite of professional online tools to boost your creativity and productivity.
+        </p>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="product-title">Create Design</div>
+                <div class="product-desc">
+                    Design stunning graphics, banners, and social media posts with our easy-to-use online design tool.
+                </div>
+                <a class="product-link" href="/design">Create Design</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-font"></i></div>
+                <div class="product-title">Add Text to Photo</div>
+                <div class="product-desc">
+                    Easily add and customize text on your photos. Choose from a variety of styles to make your images stand out.
+                </div>
+                <a class="product-link" href="/add-text-to-photo">Add Text to Photo</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-signature"></i></div>
+                <div class="product-title">Create Signature</div>
+                <div class="product-desc">
+                    Instantly generate stylish digital signatures for documents, emails, and more. Fast, free, and secure.
+                </div>
+                <a class="product-link" href="/signature">Create Signature</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-gem"></i></div>
+                <div class="product-title">Logo Maker</div>
+                <div class="product-desc">
+                    Make a professional logo for your brand or business in minutes with our professional logo maker.
+                </div>
+                <a class="product-link" href="/logo">Logo Maker</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-magic"></i></div>
+                <div class="product-title">Background Remover</div>
+                <div class="product-desc">
+                    Remove image backgrounds with a single click. Our AI-powered tool makes it quick and easy.
+                </div>
+                <a class="product-link" href="/background-remover">Background Remover</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-image"></i></div>
+                <div class="product-title">Photo Editor</div>
+                <div class="product-desc">
+                    Edit your photos like a pro. Adjust brightness, contrast, and apply filters to enhance your images effortlessly.
+                </div>
+                <a class="product-link" href="/photo-editor">Photo Editor</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Show/hide menu icon and toggle nav links on small screens
+        const menuBtn = document.querySelector('.navbar-menu-btn');
+        const navLinks = document.querySelector('.navbar-links');
+        function handleResize() {
+            if (window.innerWidth <= 700) {
+                menuBtn.style.display = 'block';
+                navLinks.classList.remove('show');
+                navLinks.style.display = '';
+            } else {
+                menuBtn.style.display = 'none';
+                navLinks.classList.remove('show');
+                navLinks.style.display = 'flex';
+                navLinks.style.position = '';
+                navLinks.style.top = '';
+                navLinks.style.left = '';
+                navLinks.style.background = '';
+                navLinks.style.flexDirection = '';
+                navLinks.style.alignItems = '';
+                navLinks.style.gap = '';
+                navLinks.style.borderBottom = '';
+                navLinks.style.boxShadow = '';
+                navLinks.style.zIndex = '';
+                navLinks.style.padding = '';
+                navLinks.style.transition = '';
+            }
+        }
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+        // Hide menu when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 700) {
+                if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('show');
+                }
+            }
+        });
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('DOMContentLoaded', handleResize);
+    </script>
 </body>
-
 </html>
